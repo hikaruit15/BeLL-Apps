@@ -29,10 +29,10 @@ class LanguageTest(BaseCase):
             dropdown.select_by_value(str(languages[i]))
             
            # sleep(10)
-            waitdr = WebDriverWait(driver, 10)
+            waitdr = WebDriverWait(driver, 20)
             #WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "c50_login")))   
             waitdr.until(EC.invisibility_of_element_located((By.ID, "c50_login")))
-            waitdr.until(EC.visibility_of_element_located((By.ID, "c50_login")))   
+            waitdr.until(EC.element_to_be_clickable((By.ID, "c50_login")))   
 
             actual = driver.find_element_by_xpath('//label[@for="c50_login"]').text
             expected = logins[i]
