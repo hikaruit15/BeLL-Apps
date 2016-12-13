@@ -27,10 +27,10 @@ class LanguageTest(BaseCase):
         for i in range(len(languages)):
             dropdown = Select(driver.find_element_by_id("onLoginLanguage"))
             dropdown.select_by_value(languages[i])
-            
-            sleep(1000)
-            WebDriverWait(driver, 1000).until(EC.presence_of_element_located((By.ID, "c50_login")))
-            
+        
+            #WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, "formButton)))
+            sleep(10)
+
             actual = driver.find_element_by_xpath('//label[@for="c50_login"]').text
             expected = logins[i]
             self.assertEqual(actual, expected)
