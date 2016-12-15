@@ -24,9 +24,9 @@ class LanguageTest(BaseCase):
         driver.get("http://127.0.0.1:5981/apps/_design/bell/MyApp/index.html")
         # test all languages
         languages = ["Arabic", "English", "Spanish", "Urdu"]
-        logins = ["دخول", "Login", "Iniciar sesión", "لاگ ان"]
+       # logins = ["دخول", "Login", "Iniciar sesión", "لاگ ان"]
 
-       # logins = ["تسجيل الدخول", "Sign In", "Crear cuenta", "سائن ان کریں"]
+        logins = ["تسجيل الدخول", "Sign In", "Crear cuenta", "سائن ان کریں"]
         for i in range(len(languages)):
             WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "onLoginLanguage")))
             while True:
@@ -44,16 +44,16 @@ class LanguageTest(BaseCase):
             WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
             WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
             
-            WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.XPATH, '//label[@for="c50_login"]')))   
+            WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.ID, 'formButton')))   
 
             actual = ""
             
             while True:
                 try:
-                    actual = driver.find_element_by_xpath('//label[@for="c50_login"]').text
+                    actual = driver.find_element_by_id('formButton').text
                     break
                 except StaleElementReferenceException:
-                    print("Stale c50_login")
+                    print("Stale formButton")
 
             
             expected = logins[i]
