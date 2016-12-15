@@ -29,7 +29,7 @@ class LanguageTest(BaseCase):
 
         logins = ["تسجيل الدخول", "Sign In", "Crear cuenta", "سائن ان کریں"]
         for i in range(len(languages)):
-            #WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "onLoginLanguage")))
+            WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "onLoginLanguage")))
             while True:
                 try:
                     dropdown = Select(driver.find_element_by_id('onLoginLanguage'))
