@@ -44,7 +44,7 @@ class LanguageTest(BaseCase):
             WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
             WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
             
-            WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.XPATH, '//label[@for="c50_login"]')))   
+            WebDriverWait(driver, 30).until(EC.visibility_of_element_located((By.XPATH, '//label[@for="c50_login"]')))   
 
             actual = ""
             while True:
