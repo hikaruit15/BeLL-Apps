@@ -8,6 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -28,7 +29,7 @@ class LanguageTest(BaseCase):
 
         logins = ["تسجيل الدخول", "Sign In", "Crear cuenta", "سائن ان کریں"]
         for i in range(len(languages)):
-            WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "onLoginLanguage")))
+            #WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "onLoginLanguage")))
             while True:
                 try:
                     dropdown = Select(driver.find_element_by_id('onLoginLanguage'))
@@ -39,12 +40,13 @@ class LanguageTest(BaseCase):
 
 
             # wait for page reload 2 times
-            WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
-            WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
-            WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
-            WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
+            #WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
+            #WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
+            #WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
+            #WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
             
-            WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.ID, 'formButton')))   
+            sleep(10)
+            #WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.ID, 'formButton')))   
 
             actual = ""
             
@@ -54,7 +56,9 @@ class LanguageTest(BaseCase):
                     break
                 except StaleElementReferenceException:
                     print("Stale formButton")
-
+                except NoSuchElementException:
+                    print("No such Element")
+                    sleep(1)
             
             expected = logins[i]
             self.assertEqual(actual, expected)
