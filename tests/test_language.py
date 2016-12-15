@@ -7,12 +7,11 @@ from base_case import BaseCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-import time
-from selenium.common.exceptions import WebDriverException
+from time import sleep
 
 @on_platforms(browsers)
 class LanguageTest(BaseCase):
@@ -24,20 +23,17 @@ class LanguageTest(BaseCase):
         driver.get("http://127.0.0.1:5981/apps/_design/bell/MyApp/index.html")
         # test all languages
         languages = ["Arabic", "English", "Spanish", "Urdu"]
-        logins = ["دخول", "Login", "Iniciar sesión", "لاگ ان"]
+        logins = ["تسجيل الدخول", "Sign In", "Crear cuenta", "سائن ان کریں"]
         for i in range(len(languages)):
+            WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "onLoginLanguage")))
             dropdown = Select(driver.find_element_by_id("onLoginLanguage"))
-            dropdown.select_by_value(str(languages[i]))
+            old_button = driver.find_element_by_id("formButton")
+            dropdown.select_by_value(languages[i])
+
+            sleep(10)
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "formButton")))   
             
-           # sleep(10)
-            waitdr = WebDriverWait(driver, 10)
-
-            #WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "c50_login")))   
-            waitdr.until(EC.invisibility_of_element_located((By.ID, "c50_login")))
-            waitdr.until(EC.visibility_of_element_located((By.ID, "c50_login")))   
-
-
-            actual = driver.find_element_by_xpath('//label[@for="c50_login"]').text
+            actual = driver.find_element_by_id('formButton').text
             expected = logins[i]
             self.assertEqual(actual, expected)
             
