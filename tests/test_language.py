@@ -44,9 +44,10 @@ class LanguageTest(BaseCase):
             WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
             WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
             
-            WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.XPATH, '//label[@for="c50_login"]')))   
+            WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.XPATH, '//label[@for="c50_login"]')))   
 
             actual = ""
+            
             while True:
                 try:
                     actual = driver.find_element_by_xpath('//label[@for="c50_login"]').text
@@ -55,7 +56,6 @@ class LanguageTest(BaseCase):
                     print("Stale c50_login")
 
             
-            value_option = languages[i]
             expected = logins[i]
             self.assertEqual(actual, expected)
             
