@@ -40,19 +40,19 @@ class LanguageTest(BaseCase):
 
 
             # wait for page reload 2 times
-            #WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
-            #WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
-            #WebDriverWait(driver, 20).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
-            #WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
+            WebDriverWait(driver, 60).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
+            WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))   
+            WebDriverWait(driver, 60).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
+            WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
             
-            sleep(20)
+            sleep(60)
             #WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.ID, 'formButton')))   
 
             actual = ""
             
             while True:
                 try:
-                    actual = driver.find_element_by_id('formButton').text
+                    actual = driver.find_element_by_xpath('//a[@id="formButton"]').text
                     break
                 except StaleElementReferenceException:
                     print("Stale formButton")
