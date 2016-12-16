@@ -45,7 +45,7 @@ class LanguageTest(BaseCase):
             #WebDriverWait(driver, 60).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
             #WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
             
-            sleep(100)
+            sleep(80)
             #WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.ID, 'formButton')))   
 
             actual = ""
