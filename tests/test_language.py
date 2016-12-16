@@ -45,7 +45,7 @@ class LanguageTest(BaseCase):
             #WebDriverWait(driver, 60).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
             #WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
             
-            sleep(80)
+            #sleep(80)
             #WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.ID, 'formButton')))   
 
             actual = ""
@@ -53,7 +53,8 @@ class LanguageTest(BaseCase):
             while True:
                 try:
                     actual = driver.find_element_by_xpath('//a[@id="formButton"]').text
-                    break
+                    if actual == logins[i]:
+                        break
                 except StaleElementReferenceException:
                     print("Stale formButton")
                 except NoSuchElementException:
