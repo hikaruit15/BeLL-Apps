@@ -28,15 +28,19 @@ class LanguageTest(BaseCase):
        # logins = ["دخول", "Login", "Iniciar sesión", "لاگ ان"]
 
         logins = ["تسجيل الدخول", "Sign In", "Crear cuenta", "سائن ان کریں"]
+
+        text_lan = ["العربية", "English", "Español", "اردو"]
         for i in range(len(languages)):
             WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "onLoginLanguage")))
             while True:
                 try:
-                    dropdown = Select(driver.find_element_by_id('onLoginLanguage'))
-                    dropdown.select_by_value(languages[i])
+                    #dropdown = Select(driver.find_element_by_id('onLoginLanguage'))
+                    #dropdown.select_by_value(languages[i])
+                   # driver.find_element_by_id('onLoginLanguage').send_keys(text_lan[i])
+                    driver.find_element_by_xpath('//select[@id="onLoginLanguage"]/option[@value="' + languages[i] + '"]').click()
                     break
                 except StaleElementReferenceException:
-                    print("Stale select")
+                    print("Stale select" + str(i))
 
 
             # wait for page reload 2 times
@@ -45,20 +49,24 @@ class LanguageTest(BaseCase):
             #WebDriverWait(driver, 60).until(EC.invisibility_of_element_located((By.TAG_NAME, "html")))   
             #WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.TAG_NAME, "html")))               
             
-            #sleep(80)
-            #WebDriverWait(driver, 30, 3).until(EC.visibility_of_element_located((By.ID, 'formButton')))   
+           
+
+            sleep(80)
+            WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, 'formButton')))   
 
             actual = ""
             
             while True:
                 try:
                     actual = driver.find_element_by_xpath('//a[@id="formButton"]').text
-                    if actual == logins[i]:
-                        break
+                    print("actual : " + actual)
+                    break
+                  #  if actual == logins[i]:
+                   #     break
                 except StaleElementReferenceException:
-                    print("Stale formButton")
+                    print("Stale formButton" + str(i))
                 except NoSuchElementException:
-                    print("No such Element")
+                    print("No such Element" + str(i))
                     sleep(1)
             
             expected = logins[i]
