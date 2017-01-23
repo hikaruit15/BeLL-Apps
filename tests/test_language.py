@@ -39,8 +39,6 @@ class LanguageTest(BaseCase):
             expected = login
             self.assertEqual(actual, expected)
 
-
-
 if __name__ == "__main__":
     unittest.main()
 
